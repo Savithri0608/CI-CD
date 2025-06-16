@@ -16,6 +16,7 @@ phases:
       - echo "Sanitizing env vars..."
       - export DOCKER_REGISTRY_URL=$(echo "$DOCKER_REGISTRY_URL" | tr -d '\n' | tr -d '\r')
       - export DOCKER_REGISTRY_USERNAME=$(echo "$DOCKER_REGISTRY_USERNAME" | tr -d '\n' | tr -d '\r')
+      - echo "$DOCKER_REGISTRY_PASSWORD" | docker login -u "$DOCKER_REGISTRY_USERNAME" --password-stdin "$DOCKER_REGISTRY_URL"
   build:
     commands:
       - echo "Running tests..."
